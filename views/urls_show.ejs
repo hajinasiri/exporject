@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>URL Shortener</title></head>
+<body>
+
+<% include ./partials/_header.ejs %>
+
+    <% var mykeys = Object.keys(urls); %>
+    <% mykeys.forEach(function(key){ %>
+      <% if(key === shortURL){%>
+        <% var out = shortURL + " = " + urls[key]%>
+        <%= out %>
+        <form method="POST" action="/urls/<%=key%>/update">
+        <br>
+        <br>
+        ShortURL: <%=shortURL%><br>
+
+        <input type="text" name="NewURL">
+
+        <input type= "submit" value =Update>
+        </form>
+
+
+        <%}%>
+      <%})%>
+    <!-- Add your EJS code here -->
+
+    <% %>
+</body>
+</html>

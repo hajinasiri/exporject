@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>URL Shortener</title></head>
+<body>
+<% include ./partials/_header.ejs %>
+    <!-- Add your EJS code here -->
+    <% var mykeys = Object.keys(urls);%>
+    <% mykeys.forEach(function(key,ind){ %>
+    <% var p = key + " = " + urls[key]; %>
+    <span> <%= p%> <span>
+        <form method="POST" action="/urls/<%=key%>/delete">
+
+          <input type= "submit" value =Delete>
+          <a href="http://localhost:8080/urls/<%=key%>"> Edit</a>
+        </form>
+
+        <br>
+        <br>
+    <% }) %>
+    <% var slink = "link for shortenning = "; %>
+    <p> <%= slink %> <p>
+
+</body>
+</html>
