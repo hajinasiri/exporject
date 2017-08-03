@@ -10,13 +10,13 @@
       <% if(key === shortURL){%>
         <% var out = shortURL + " = " + urls[key]%>
         <%= out %>
-        <form method="POST" action="/urls/<%=key%>/update">
+        <form method = "POST" action = "/test/update">
         <br>
         <br>
         ShortURL: <%=shortURL%><br>
 
         <input type="text" name="NewURL">
-
+        <input type="hidden" name="shortURL" value=<%=key%>>
         <input type= "submit" value =Update>
         </form>
 

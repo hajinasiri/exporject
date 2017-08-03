@@ -7,7 +7,7 @@
     <% var mykeys = Object.keys(urls);%>
     <% mykeys.forEach(function(key,ind){ %>
     <% var p = key + " = " + urls[key]; %>
-    <span> <%= p%> <span>
+     <%= p%><br>
         <form method="POST" action="/urls/<%=key%>/delete">
 
           <input type= "submit" value =Delete>
@@ -17,8 +17,10 @@
         <br>
         <br>
     <% }) %>
-    <% var slink = "link for shortenning = "; %>
-    <p> <%= slink %> <p>
 
+    <form method="POST" action="/urls">
+
+          <input type= "submit" value ="Create short URL" size = "50" style="width: 100px;"}>
+        </form>
 </body>
 </html>
