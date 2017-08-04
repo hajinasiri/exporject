@@ -1,16 +1,20 @@
 //function to generate a string of 6 random characters
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 function generateRandomString() {
   var gstring = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
   result = '';
-  for(let i = 1; i < 7; i++){
+  for (let i = 1; i < 7; i++) {
     result += gstring[getRandomInt(1,62)];
   }
   return result;
 }
+
 //Creating user object
 const users = {
   "userRandomID": {
@@ -96,13 +100,9 @@ app.get("/u/:shortURL", (req, res) => {
       res.redirect(urlDatabase[key].address);
     }
   });
-
-
 });
 //delete botton function
 app.post("/urls/:id/delete",(req, res) => {
-  console.log('my cookie id', req.session.user_id);
-  console.log('my db id', urlDatabase[req.params.id].userID);
   if(req.session.user_id === urlDatabase[req.params.id].userID){
     delete urlDatabase[req.params.id];
   }
@@ -132,7 +132,6 @@ app.get("/urls/:id", (req, res) => {
 });
 //generating short URL and redirecting to the long url
 app.post("/urls", (req, res) => {
-  // console.log(req.body);  // debug statement to see POST parameters
   let temp = generateRandomString();
   urlDatabase[temp] = {address: '', userID: req.session.user_id};
   res.redirect("http://localhost:8080/urls/" + temp);
@@ -160,7 +159,6 @@ app.post("/register", (req, res)=>{
     let randomid = generateRandomString();
     let password = req.body.password;
     const hashed_password = bcrypt.hashSync(password, 10);
-    console.log(hashed_password);
     users[randomid] = {id: randomid, email: req.body.email, password: hashed_password};
 
     req.session.user_id = randomid;
@@ -189,13 +187,13 @@ app.post("/login", (req, res) => {
   }
 });
 
-function urlsForUser(id){
+function urlsForUser(id) {
   let result = {};
   for (var prop in urlDatabase) {
-    if(urlDatabase[prop].userID === id){
+    if(urlDatabase[prop].userID === id) {
       result[prop] = urlDatabase[prop];
     }
   }
   return(result);
 }
-console.log(urlsForUser("user2RandomID"))
+
