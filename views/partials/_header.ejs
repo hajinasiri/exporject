@@ -1,11 +1,11 @@
 <header>
-  <%if(userobject.user_id !== undefined){%>
+  <% if (userobject.user_id) { %>
     welcome <%userobject.user_id%>
     <form method="POST" action="/logout">
-    <input type= "submit" value =Logout>
-    <form>
-  <%}else{%>
+      <input type= "submit" value =Logout>
+    </form>
+  <% } else { %>
     <a href="http://localhost:8080/login"> Login here</a><br>
     <a href="http://localhost:8080/register"> Create an account</a><br>
-  <%}%>
+  <% } %>
 </header>

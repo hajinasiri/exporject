@@ -3,24 +3,26 @@
 <head><title>URL Shortener</title></head>
 <body>
 <% include ./partials/_header.ejs %>
-    <!-- Add your EJS code here -->
     <% var mykeys = Object.keys(urls);%>
     <% mykeys.forEach(function(key,ind){ %>
-    <% var p = key + " = " + urls[key]; %>
+    <% var p = key + " = " + urls[key].address; %>
      <%= p%><br>
-        <form method="POST" action="/urls/<%=key%>/delete">
+        <% if(userobject.user_id === urls[key].userID){%>
+          <form method="POST" action="/urls/<%=key%>/delete">
+            <input type= "submit" value =Delete>
+            <a href="http://localhost:8080/urls/<%=key%>"> Edit</a>
+          </form>
+        <%}%>
 
-          <input type= "submit" value =Delete>
-          <a href="http://localhost:8080/urls/<%=key%>"> Edit</a>
-        </form>
 
         <br>
         <br>
     <% }) %>
-
+    <%if(userobject.user_id !== undefined){%>
     <form method="POST" action="/urls">
-
-          <input type= "submit" value ="Create short URL" size = "50" style="width: 100px;"}>
-        </form>
+      <input type= "submit" value ="Create short URL" size = "50" style="width: 100px;"}>
+      <input type= "hidden" value = }>
+    </form>
+    <%}%>
 </body>
 </html>

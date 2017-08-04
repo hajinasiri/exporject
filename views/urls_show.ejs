@@ -3,28 +3,31 @@
 <head><title>URL Shortener</title></head>
 <body>
 
-<% include ./partials/_header.ejs %>
+  <% include ./partials/_header.ejs %>
+
+  <% if(userobject.user_id){ %>
 
     <% var mykeys = Object.keys(urls); %>
+
     <% mykeys.forEach(function(key){ %>
       <% if(key === shortURL){%>
-        <% var out = shortURL + " = " + urls[key]%>
+
+        <% var out = shortURL + " = " + urls[key].address%>
         <%= out %>
-        <form method = "POST" action = "/test/update">
-        <br>
-        <br>
-        ShortURL: <%=shortURL%><br>
+        <form method = "POST" action ="/test/update">
+          <br>
+          <br>
+          ShortURL: <%=shortURL%><br>
 
-        <input type="text" name="NewURL">
-        <input type="hidden" name="shortURL" value=<%=key%>>
-        <input type= "submit" value =Update>
+          <input type="text" name="NewURL">
+          <input type="hidden" name="shortURL" value=<%=key%>>
+          <input type= "submit" value =Update>
         </form>
+      <%}%>
 
-
-        <%}%>
-      <%})%>
-    <!-- Add your EJS code here -->
-
-    <% %>
+    <%})%>
+  <%}else{%>
+    <h2>Sorry baby. You don't have access to this page<h2>
+    <%}%>
 </body>
 </html>
